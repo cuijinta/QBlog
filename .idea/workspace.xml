@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d65d149c-03ce-4b64-b53d-ebadcdb52b1b" name="Changes" comment="测试提交">
-      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/constant/AppHttpCodeEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/result/Result.java" afterDir="false" />
+    <list default="true" id="d65d149c-03ce-4b64-b53d-ebadcdb52b1b" name="Changes" comment="显示热门文章功能">
+      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/config/WebConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qianye-blog/src/main/java/com/lut/controller/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-blog/src/main/java/com/lut/controller/ArticleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/ArticleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/ArticleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/impl/ArticleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/impl/ArticleServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +114,7 @@
       <option name="presentableId" value="Default" />
       <updated>1698031051002</updated>
       <workItem from="1698031052093" duration="6380000" />
-      <workItem from="1698045286253" duration="14244000" />
+      <workItem from="1698045286253" duration="15150000" />
     </task>
     <task id="LOCAL-00001" summary="搭建环境，构建基础架构">
       <option name="closed" value="true" />
@@ -160,7 +156,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698050397347</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="显示热门文章功能">
+      <option name="closed" value="true" />
+      <created>1698066947732</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1698066947732</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,7 +211,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="搭建环境，构建基础架构" />
     <MESSAGE value="测试提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="测试提交" />
+    <MESSAGE value="显示热门文章功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="显示热门文章功能" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
