@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d65d149c-03ce-4b64-b53d-ebadcdb52b1b" name="Changes" comment="搭建环境，构建基础架构" />
+    <list default="true" id="d65d149c-03ce-4b64-b53d-ebadcdb52b1b" name="Changes" comment="测试提交">
+      <change beforePath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/mapper/ArticleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/mapper/ArticleMapper.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -110,7 +112,7 @@
       <option name="presentableId" value="Default" />
       <updated>1698031051002</updated>
       <workItem from="1698031052093" duration="6380000" />
-      <workItem from="1698045286253" duration="4826000" />
+      <workItem from="1698045286253" duration="5084000" />
     </task>
     <task id="LOCAL-00001" summary="搭建环境，构建基础架构">
       <option name="closed" value="true" />
@@ -136,7 +138,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698049774851</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="测试提交">
+      <option name="closed" value="true" />
+      <created>1698050274548</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698050274548</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,7 +192,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="搭建环境，构建基础架构" />
-    <option name="LAST_COMMIT_MESSAGE" value="搭建环境，构建基础架构" />
+    <MESSAGE value="测试提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="测试提交" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
