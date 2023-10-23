@@ -4,24 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d65d149c-03ce-4b64-b53d-ebadcdb52b1b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-admin/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-blog/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-blog/src/main/java/com/lut/QianYeBlogApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-blog/src/main/java/com/lut/controller/ArticleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-blog/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-framework/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/entity/Article.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/mapper/ArticleMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/ArticleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/impl/ArticleServiceImpl.java" afterDir="false" />
+    <list default="true" id="d65d149c-03ce-4b64-b53d-ebadcdb52b1b" name="Changes" comment="搭建环境，构建基础架构">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +21,15 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="60239551-658a-4679-a301-053c16d31d3b" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -66,14 +58,14 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Qblog",
     "jdk.selected.JAVA_MODULE": "11",
     "last_opened_file_path": "D:/Desktop/JavaActualCombat/QBlog/qianye-framework/src/main/java/com/lut/service",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "com.sjhy.plugin.ui.TemplateSettingForm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
     "settings.editor.splitter.proportion": "0.22556391",
     "spring.configuration.checksum": "f686dc418aee895e2affe2849577a18c",
     "vue.rearranger.settings.migration": "true"
@@ -120,12 +112,33 @@
       <option name="presentableId" value="Default" />
       <updated>1698031051002</updated>
       <workItem from="1698031052093" duration="6380000" />
-      <workItem from="1698045286253" duration="2258000" />
+      <workItem from="1698045286253" duration="4455000" />
     </task>
+    <task id="LOCAL-00001" summary="搭建环境，构建基础架构">
+      <option name="closed" value="true" />
+      <created>1698047698596</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698047698596</updated>
+    </task>
+    <task id="LOCAL-00002" summary="搭建环境，构建基础架构">
+      <option name="closed" value="true" />
+      <created>1698047975038</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698047975038</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="搭建环境，构建基础架构" />
+    <option name="LAST_COMMIT_MESSAGE" value="搭建环境，构建基础架构" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
