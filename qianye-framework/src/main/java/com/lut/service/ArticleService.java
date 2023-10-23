@@ -2,6 +2,7 @@ package com.lut.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lut.entity.Article;
+import com.lut.result.Result;
 
 
 /**
@@ -12,4 +13,9 @@ import com.lut.entity.Article;
  */
 public interface ArticleService extends IService<Article> {
 
+    /**
+     * 获取热门文章列表的方法
+     * @return
+     */
+    Result hotArticleList();
 }
