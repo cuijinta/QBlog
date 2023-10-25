@@ -6,14 +6,22 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lut.constant.SystemConstants;
 import com.lut.pojo.entity.Article;
 import com.lut.mapper.ArticleMapper;
+import com.lut.pojo.entity.Category;
+import com.lut.pojo.entity.vo.ArticleListVO;
+import com.lut.pojo.entity.vo.CategoryVO;
 import com.lut.pojo.entity.vo.HotArticleVO;
+import com.lut.pojo.entity.vo.PageVO;
 import com.lut.result.Result;
 import com.lut.service.ArticleService;
+import com.lut.service.CategoryService;
 import com.lut.utils.BeanCopyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * 文章表(Article)表服务实现类
@@ -26,6 +34,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Autowired
     private ArticleMapper articleMapper;
+
+    @Autowired
+    private CategoryService categoryService;
 
     /**
      * 获取热门文章列表的方法
@@ -51,6 +62,53 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         List<HotArticleVO> hotArticleVOS = BeanCopyUtils.copyBeanList(articles, HotArticleVO.class);
 
         return Result.okResult(hotArticleVOS);
+    }
+
+    /**
+     * 根据分类查询文章的方法
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param categoryId
+     * @return
+     */
+    public Result articleList(Integer pageNum, Integer pageSize, Long categoryId) {
+        //查询条件
+        LambdaQueryWrapper<Article> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        //1.如果有category 查询时要和传入的相同
+        lambdaQueryWrapper.eq(Objects.nonNull(categoryId) && categoryId > 0, Article::getCategoryId, categoryId);
+        //文章的状态是已经发布的
+        //对isTop进行降序
+        lambdaQueryWrapper.orderByDesc(Article::getIsTop);
+        //分页查询
+        Page<Article> page = new Page<>(pageNum, pageSize);
+        page(page, lambdaQueryWrapper);
+        //写法1：
+//        //查询分类名称
+//        List<Article> articleList = page.getRecords();
+//        for(Article article : articleList) {
+//            Category category = categoryService.getById(article.getCategoryId());
+//            article.setCategoryName(category.getName());
+//        }
+        //写法2：
+//        List<Article> articleList = page.getRecords();
+//        articleList = articleList.stream()
+//                .map(new Function<Article, Article>() {
+//                    public Article apply(Article article) {
+//                        return article.setCategoryName(categoryService.getById(article.getCategoryId()).getName());
+//                    }
+//                }).collect(Collectors.toList());
+
+        //最简化写法
+        List<Article> articleList = page.getRecords();
+        articleList = articleList.stream()
+                .map(article ->  article.setCategoryName(categoryService.getById(article.getCategoryId()).getName()))
+                .collect(Collectors.toList());
+
+        //封装查询结果
+        List<ArticleListVO> articleListVOS = BeanCopyUtils.copyBeanList(page.getRecords(), ArticleListVO.class);
+        PageVO pageVO = new PageVO(articleListVOS, page.getTotal());
+        return Result.okResult(pageVO);
     }
 
 }

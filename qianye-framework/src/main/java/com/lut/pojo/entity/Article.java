@@ -4,11 +4,13 @@ import java.util.Date;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.experimental.Accessors;
 
 /**
  * 文章表(Article)表实体类
@@ -21,6 +23,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("qy_article")    //设置实体类与表名的映射
+@Accessors(chain = true)   //set方法的返回值变成了属性值本身
 public class Article implements Serializable {
     @TableId
     private Long id;
@@ -33,6 +36,9 @@ public class Article implements Serializable {
     private String summary;
     //所属分类id
     private Long categoryId;
+
+    @TableField(exist = false) //标识该字段不在表中，是后面添加的
+    private String categoryName;
     //缩略图
     private String thumbnail;
     //是否置顶（0否，1是）
