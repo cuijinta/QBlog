@@ -1,4 +1,4 @@
-package com.lut.entity;
+package com.lut.pojo.entity;
 
 import java.util.Date;
 

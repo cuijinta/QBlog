@@ -1,7 +1,7 @@
 package com.lut.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lut.entity.Article;
+import com.lut.pojo.entity.Article;
 
 
 /**

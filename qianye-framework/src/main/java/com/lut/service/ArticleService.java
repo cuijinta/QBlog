@@ -1,7 +1,7 @@
 package com.lut.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.lut.entity.Article;
+import com.lut.pojo.entity.Article;
 import com.lut.result.Result;
 
 

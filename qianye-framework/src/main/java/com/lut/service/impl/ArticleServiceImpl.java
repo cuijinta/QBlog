@@ -3,13 +3,18 @@ package com.lut.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.lut.entity.Article;
+import com.lut.constant.SystemConstants;
+import com.lut.pojo.entity.Article;
 import com.lut.mapper.ArticleMapper;
+import com.lut.pojo.entity.vo.HotArticleVO;
 import com.lut.result.Result;
 import com.lut.service.ArticleService;
+import com.lut.utils.BeanCopyUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,7 +38,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         //查询热门文章 封装成Result封装返回
         LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
         //必须是已发布的文章
-        queryWrapper.eq(Article::getStatus, 0);
+        queryWrapper.eq(Article::getStatus, SystemConstants.ARTICLE_STATUS_NORMAL);
 
         //按照浏览量进行排序
         queryWrapper.orderByDesc(Article::getViewCount);
@@ -43,6 +48,25 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         page(pages, queryWrapper);
 
         List<Article> articles = pages.getRecords();
-        return Result.okResult(articles);
+
+        //Bean拷贝
+//        articles.stream().forEach(article -> {
+//            HotArticleVO hotArticleVO = new HotArticleVO();
+//            BeanUtils.copyProperties(article, hotArticleVO);
+//            hotArticleVOS.add(hotArticleVO);
+//        });
+        List<HotArticleVO> hotArticleVOS = BeanCopyUtils.copyBeanList(articles, HotArticleVO.class);
+
+        return Result.okResult(hotArticleVOS);
     }
+
+//    public static void main(String[] args) {
+//        Article article = new Article();
+//        article.setId(23L);
+//        article.setTitle("标题");
+//        article.setViewCount(33L);
+//
+//        HotArticleVO hotArticleVO = BeanCopyUtils.copyBean(article, HotArticleVO.class);
+//        System.out.println(hotArticleVO);
+//    }
 }
