@@ -9,7 +9,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    @Override
+    /**
+     * 解决跨域问题
+     *
+     * @param registry
+     */
     public void addCorsMappings(CorsRegistry registry) {
         // 设置允许跨域的路径
         registry.addMapping("/**")
@@ -24,4 +28,5 @@ public class WebConfig implements WebMvcConfigurer {
                 // 跨域允许时间
                 .maxAge(3600);
     }
+
 }

@@ -4,18 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d65d149c-03ce-4b64-b53d-ebadcdb52b1b" name="Changes" comment="解决跨域问题">
-      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/constant/SystemConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/pojo/entity/vo/HotArticleVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/utils/BeanCopyUtils.java" afterDir="false" />
+    <list default="true" id="d65d149c-03ce-4b64-b53d-ebadcdb52b1b" name="Changes" comment="热门文章查询、属性拷贝工具类">
+      <change afterPath="$PROJECT_DIR$/qianye-blog/src/main/java/com/lut/controller/CategoryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/mapper/CategoryMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/pojo/entity/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/pojo/entity/vo/CategoryVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/CategoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/impl/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/easyCodeTableSetting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/easyCodeTableSetting.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qianye-blog/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-blog/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qianye-blog/src/main/java/com/lut/QianYeBlogApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-blog/src/main/java/com/lut/QianYeBlogApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qianye-framework/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/entity/Article.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/pojo/entity/Article.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/mapper/ArticleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/mapper/ArticleMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/ArticleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/ArticleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qianye-blog/src/main/java/com/lut/controller/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-blog/src/main/java/com/lut/controller/ArticleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/constant/SystemConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/constant/SystemConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/impl/ArticleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/impl/ArticleServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,10 +56,16 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="2X9AiaOcTbMVAgpmcFtvoiuJQQU" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
+    <option name="foldersAlwaysOnTop" value="false" />
     <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
+    <option name="showScratchesAndConsoles" value="false" />
+    <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
@@ -68,11 +75,10 @@
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Qblog&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Desktop/JavaActualCombat/QBlog/qianye-framework/src/main/java/com/lut/service&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Desktop/JavaActualCombat/QBlog/qianye-framework/src/main/java/com&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -139,7 +145,8 @@
       <updated>1698031051002</updated>
       <workItem from="1698031052093" duration="6380000" />
       <workItem from="1698045286253" duration="22742000" />
-      <workItem from="1698215823595" duration="1682000" />
+      <workItem from="1698215823595" duration="6669000" />
+      <workItem from="1698222643698" duration="3269000" />
     </task>
     <task id="LOCAL-00001" summary="搭建环境，构建基础架构">
       <option name="closed" value="true" />
@@ -197,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698069407631</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="热门文章查询、属性拷贝工具类">
+      <option name="closed" value="true" />
+      <created>1698217688233</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1698217688233</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,7 +261,8 @@
     <MESSAGE value="测试提交" />
     <MESSAGE value="显示热门文章功能" />
     <MESSAGE value="解决跨域问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="解决跨域问题" />
+    <MESSAGE value="热门文章查询、属性拷贝工具类" />
+    <option name="LAST_COMMIT_MESSAGE" value="热门文章查询、属性拷贝工具类" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

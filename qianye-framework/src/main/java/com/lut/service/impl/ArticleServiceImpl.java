@@ -10,11 +10,9 @@ import com.lut.pojo.entity.vo.HotArticleVO;
 import com.lut.result.Result;
 import com.lut.service.ArticleService;
 import com.lut.utils.BeanCopyUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,24 +47,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
         List<Article> articles = pages.getRecords();
 
-        //Bean拷贝
-//        articles.stream().forEach(article -> {
-//            HotArticleVO hotArticleVO = new HotArticleVO();
-//            BeanUtils.copyProperties(article, hotArticleVO);
-//            hotArticleVOS.add(hotArticleVO);
-//        });
+        //属性拷贝
         List<HotArticleVO> hotArticleVOS = BeanCopyUtils.copyBeanList(articles, HotArticleVO.class);
 
         return Result.okResult(hotArticleVOS);
     }
 
-//    public static void main(String[] args) {
-//        Article article = new Article();
-//        article.setId(23L);
-//        article.setTitle("标题");
-//        article.setViewCount(33L);
-//
-//        HotArticleVO hotArticleVO = BeanCopyUtils.copyBean(article, HotArticleVO.class);
-//        System.out.println(hotArticleVO);
-//    }
 }

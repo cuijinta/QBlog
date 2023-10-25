@@ -2,6 +2,7 @@ package com.lut.controller;
 
 import com.lut.result.Result;
 import com.lut.service.ArticleService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
