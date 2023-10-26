@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d65d149c-03ce-4b64-b53d-ebadcdb52b1b" name="Changes" comment="获取文章分类">
-      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/config/MyBatisPlusConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/pojo/entity/vo/ArticleListVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/pojo/entity/vo/PageVO.java" afterDir="false" />
+    <list default="true" id="d65d149c-03ce-4b64-b53d-ebadcdb52b1b" name="Changes" comment="按照分类查询文章信息">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qianye-blog/src/main/java/com/lut/controller/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-blog/src/main/java/com/lut/controller/ArticleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/pojo/entity/Article.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/pojo/entity/Article.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/ArticleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/ArticleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/pojo/entity/vo/PageVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/pojo/entity/vo/PageVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/impl/ArticleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/qianye-framework/src/main/java/com/lut/service/impl/ArticleServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -141,7 +138,7 @@
       <workItem from="1698031052093" duration="6380000" />
       <workItem from="1698045286253" duration="22742000" />
       <workItem from="1698215823595" duration="6669000" />
-      <workItem from="1698222643698" duration="12225000" />
+      <workItem from="1698222643698" duration="20497000" />
     </task>
     <task id="LOCAL-00001" summary="搭建环境，构建基础架构">
       <option name="closed" value="true" />
@@ -215,7 +212,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698225967504</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="按照分类查询文章信息">
+      <option name="closed" value="true" />
+      <created>1698244516500</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1698244516501</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,7 +271,8 @@
     <MESSAGE value="解决跨域问题" />
     <MESSAGE value="热门文章查询、属性拷贝工具类" />
     <MESSAGE value="获取文章分类" />
-    <option name="LAST_COMMIT_MESSAGE" value="获取文章分类" />
+    <MESSAGE value="按照分类查询文章信息" />
+    <option name="LAST_COMMIT_MESSAGE" value="按照分类查询文章信息" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

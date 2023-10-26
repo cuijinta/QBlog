@@ -25,6 +25,13 @@ public class ArticleController {
         return result;
     }
 
+    /**
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param categoryId
+     * @return
+     */
     @GetMapping("/articleList")
     public Result articleList(Integer pageNum, Integer pageSize, Long categoryId) {
         return articleService.articleList(pageNum, pageSize, categoryId);

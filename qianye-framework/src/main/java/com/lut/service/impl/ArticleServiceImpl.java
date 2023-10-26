@@ -6,9 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lut.constant.SystemConstants;
 import com.lut.pojo.entity.Article;
 import com.lut.mapper.ArticleMapper;
-import com.lut.pojo.entity.Category;
 import com.lut.pojo.entity.vo.ArticleListVO;
-import com.lut.pojo.entity.vo.CategoryVO;
 import com.lut.pojo.entity.vo.HotArticleVO;
 import com.lut.pojo.entity.vo.PageVO;
 import com.lut.result.Result;
@@ -20,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
