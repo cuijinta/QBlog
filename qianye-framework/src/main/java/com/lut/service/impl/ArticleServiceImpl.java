@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lut.constant.SystemConstants;
 import com.lut.pojo.entity.Article;
 import com.lut.mapper.ArticleMapper;
+import com.lut.pojo.entity.Category;
+import com.lut.pojo.entity.vo.ArticleDetailVO;
 import com.lut.pojo.entity.vo.ArticleListVO;
 import com.lut.pojo.entity.vo.HotArticleVO;
 import com.lut.pojo.entity.vo.PageVO;
@@ -106,6 +108,29 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         List<ArticleListVO> articleListVOS = BeanCopyUtils.copyBeanList(page.getRecords(), ArticleListVO.class);
         PageVO pageVO = new PageVO(articleListVOS, page.getTotal());
         return Result.okResult(pageVO);
+    }
+
+    /**
+     * 根据文章id获取详情
+     * @param id
+     * @return
+     */
+    public Result getArticleDetail(Long id) {
+        //根据id查询文章
+        Article article = getById(id);
+
+        //转换成VO
+        ArticleDetailVO articleDetailVO = BeanCopyUtils.copyBean(article, ArticleDetailVO.class);
+
+        //查询对应的分类名称(先从拷贝后的vo当中拿出categoryId,再根据Id查询分类名称)
+        Long categoryId = articleDetailVO.getCategoryId();
+        Category category = categoryService.getById(categoryId);
+        if(category != null) {
+            articleDetailVO.setCategoryName(category.getName());
+        }
+
+        //封装响应返回
+        return Result.okResult(articleDetailVO);
     }
 
 }
