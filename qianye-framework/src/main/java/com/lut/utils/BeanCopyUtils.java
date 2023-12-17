@@ -26,8 +26,9 @@ public class BeanCopyUtils {
         //创建目标对象
         T vo = null;
         try {
-            vo = clazz.newInstance();
+//            vo = clazz.newInstance();
             //实现属性拷贝
+            vo = clazz.getDeclaredConstructor().newInstance();
             BeanUtils.copyProperties(source, vo);
 
             //返回结果
