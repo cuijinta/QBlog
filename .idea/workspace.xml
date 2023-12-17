@@ -29,7 +29,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -60,35 +60,33 @@
     <option name="showScratchesAndConsoles" value="false" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "database.data.extractors.current.export.id": "JSON-Groovy.json.groovy",
-    "git-widget-placeholder": "main",
-    "jdk.selected.JAVA_MODULE": "11",
-    "last_opened_file_path": "D:/Desktop/JavaActualCombat/QBlo",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "fileTemplates",
-    "settings.editor.splitter.proportion": "0.22556391",
-    "spring.configuration.checksum": "f686dc418aee895e2affe2849577a18c",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Qblog&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Desktop/JavaActualCombat/QBlog/qianye-framework/src/main/java/com&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.22556391&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;f686dc418aee895e2affe2849577a18c&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -141,10 +139,7 @@
       <workItem from="1698031052093" duration="6380000" />
       <workItem from="1698045286253" duration="22742000" />
       <workItem from="1698215823595" duration="6669000" />
-      <workItem from="1698222643698" duration="26511000" />
-      <workItem from="1698324914194" duration="1526000" />
-      <workItem from="1698330704610" duration="883000" />
-      <workItem from="1702831012773" duration="2180000" />
+      <workItem from="1698222643698" duration="22483000" />
     </task>
     <task id="LOCAL-00001" summary="搭建环境，构建基础架构">
       <option name="closed" value="true" />
@@ -234,31 +229,7 @@
       <option name="project" value="LOCAL" />
       <updated>1698290387071</updated>
     </task>
-    <task id="LOCAL-00012" summary="文章详情展示业务">
-      <option name="closed" value="true" />
-      <created>1698292459475</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1698292459476</updated>
-    </task>
-    <task id="LOCAL-00013" summary="友链管理">
-      <option name="closed" value="true" />
-      <created>1702831167997</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1702831167997</updated>
-    </task>
-    <task id="LOCAL-00014" summary="友链">
-      <option name="closed" value="true" />
-      <created>1702832872856</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1702832872856</updated>
-    </task>
-    <option name="localTasksCounter" value="15" />
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,17 +249,6 @@
             </list>
           </value>
         </entry>
-        <entry key="User">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="*" />
-                </option>
-              </RecentGroup>
-            </list>
-          </value>
-        </entry>
       </map>
     </option>
     <option name="TAB_STATES">
@@ -296,24 +256,12 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
-                <map>
-                  <entry key="Show.Git.Branches" value="true" />
-                </map>
-              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
-                      </list>
-                    </value>
-                  </entry>
-                  <entry key="user">
-                    <value>
-                      <list>
-                        <option value="*" />
+                        <option value="HEAD" />
                       </list>
                     </value>
                   </entry>
@@ -334,10 +282,7 @@
     <MESSAGE value="获取文章分类" />
     <MESSAGE value="按照分类查询文章信息" />
     <MESSAGE value="设置时间显示格式" />
-    <MESSAGE value="文章详情展示业务" />
-    <MESSAGE value="友链管理" />
-    <MESSAGE value="友链" />
-    <option name="LAST_COMMIT_MESSAGE" value="友链" />
+    <option name="LAST_COMMIT_MESSAGE" value="设置时间显示格式" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
