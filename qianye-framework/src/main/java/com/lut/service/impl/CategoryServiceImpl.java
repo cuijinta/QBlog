@@ -6,7 +6,7 @@ import com.lut.constant.SystemConstants;
 import com.lut.mapper.CategoryMapper;
 import com.lut.pojo.entity.Article;
 import com.lut.pojo.entity.Category;
-import com.lut.pojo.entity.vo.CategoryVO;
+import com.lut.pojo.vo.CategoryVO;
 import com.lut.result.Result;
 import com.lut.service.ArticleService;
 import com.lut.service.CategoryService;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**

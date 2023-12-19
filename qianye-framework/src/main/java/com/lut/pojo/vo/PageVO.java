@@ -1,4 +1,4 @@
-package com.lut.pojo.entity.vo;
+package com.lut.pojo.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
