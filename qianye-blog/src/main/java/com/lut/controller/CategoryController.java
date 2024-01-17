@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletRequest;
+
 /**
  * @Author 浅夜
  * @Description 分类
@@ -28,4 +32,5 @@ public class CategoryController {
     public Result getCategoryList() {
         return categoryService.getCategoryList();
     }
+
 }
