@@ -2,6 +2,7 @@ package com.lut.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lut.pojo.entity.Link;
+import com.lut.result.Result;
 
 
 /**
@@ -12,4 +13,9 @@ import com.lut.pojo.entity.Link;
  */
 public interface LinkService extends IService<Link> {
 
+    /**
+     * 获取友链列表
+     * @return
+     */
+    Result getAllLink();
 }

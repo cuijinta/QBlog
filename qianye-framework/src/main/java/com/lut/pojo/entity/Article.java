@@ -38,6 +38,7 @@ public class Article implements Serializable {
 
     @TableField(exist = false) //标识该字段不在表中，是后面添加的
     private String categoryName;
+
     //缩略图
     private String thumbnail;
     //是否置顶（0否，1是）
@@ -56,6 +57,7 @@ public class Article implements Serializable {
     private Long updateBy;
 
     private Date updateTime;
+
     //删除标志（0代表未删除，1代表已删除）
     @TableLogic
     private Integer delFlag;

@@ -42,7 +42,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
         //2.获取文章的分类id，并且去重
         Set<Long> categoryIds = articles.stream()
-                .map(article -> article.getCategoryId())
+                .map(Article::getCategoryId)
                 .collect(Collectors.toSet());
 
         //3.查询分类表
@@ -51,7 +51,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         categories = categories.stream().filter(category -> category.getStatus().equals(SystemConstants.CATEGORY_STATUS_NORMAL))
                 .collect(Collectors.toList());
 
-       //4。封装VO
+       //4.封装VO
         List<CategoryVO> categoryVOList = BeanCopyUtils.copyBeanList(categories, CategoryVO.class);
         return Result.okResult(categoryVOList);
     }

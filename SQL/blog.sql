@@ -1,4 +1,4 @@
-#
+
 create table if not exists qianye_blog.qy_article
 (
     id          bigint(200) auto_increment
