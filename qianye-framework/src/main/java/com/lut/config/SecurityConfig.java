@@ -9,14 +9,27 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * 自定义 Spring Security 配置
+ * @DateTime 2024.1.19
+ */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * 密码不能明文，在这里单向加密
+     * @return
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * 配置哪些请求需要认证、哪些请求不需要认证、以及访问权限
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -35,7 +48,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
     }
 
-    @Override
+    /**
+     * 处理认证，验证用户身份
+     * @return AuthenticationManager
+     * @throws Exception e
+     */
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();

@@ -19,6 +19,11 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    /**
+     * 登录
+     * @param user 用户对象
+     * @return
+     */
     @PostMapping("/login")
     public Result login(@RequestBody User user) {
         if(Objects.isNull(user)) return Result.errorResult(AppHttpCodeEnum.LOGIN_ERROR);
