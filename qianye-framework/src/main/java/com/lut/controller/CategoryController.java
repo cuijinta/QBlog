@@ -2,6 +2,7 @@ package com.lut.controller;
 
 import com.lut.result.Result;
 import com.lut.service.CategoryService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import javax.servlet.ServletRequest;
  * @DateTime 2023/10/25 15:53
  **/
 @RestController
+@Api(tags = "文章分类")
 @RequestMapping("/category")
 public class CategoryController {
 

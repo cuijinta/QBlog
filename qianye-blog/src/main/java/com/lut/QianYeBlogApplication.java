@@ -12,6 +12,6 @@ public class QianYeBlogApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(QianYeBlogApplication.class, args);
-        log.info("Service run!");
+        log.info("额滴博客~启动!");
     }
 }
