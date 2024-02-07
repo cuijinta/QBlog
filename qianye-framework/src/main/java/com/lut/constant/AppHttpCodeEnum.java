@@ -1,5 +1,8 @@
 package com.lut.constant;
 
+import lombok.Getter;
+
+@Getter
 public enum AppHttpCodeEnum {
     // 成功
     SUCCESS(200, "操作成功"),
@@ -20,11 +23,4 @@ public enum AppHttpCodeEnum {
         this.msg = errorMessage;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
 }

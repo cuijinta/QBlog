@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -35,6 +36,7 @@ public class LoginServiceImpl implements LoginService {
      * @return
      */
     @Override
+    @Transactional
     public Result login(User user) {
         //封装用户名和密码为 UsernamePasswordAuthenticationToken 对象
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword());

@@ -8,6 +8,21 @@ spring:
     multipart:
       max-file-size: 2MB
       max-request-size: 5MB
+  redis:
+    host: 47.97.179.125
+    password: cjt123
+    connect-timeout: 10s
+#    redis配置
+#      lettuce:
+#        pool:
+#          # 连接池最大连接数
+#          max-active: 150
+#          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+#          max-wait: 5000ms
+#          # 连接池中的最大空闲连接
+#          max-idle: 100
+#          # 连接池中的最小空闲连接
+#          min-idle: 50
 mybatis-plus:
   configuration:
     # 日志
@@ -19,23 +34,3 @@ mybatis-plus:
       logic-not-delete-value: 0
       id-type: auto # 主键自增
 
-#redis配置
-redis:
-  # Redis服务器地址
-  host: 47.97.179.125
-  # Redis服务器连接端口
-  port: 6379
-  # Redis服务器连接密码（默认为空）
-  password: cjt123
-  # 连接超时时间
-  timeout: 10s
-#  lettuce:
-#    pool:
-#      # 连接池最大连接数
-#      max-active: 150
-#      # 连接池最大阻塞等待时间（使用负值表示没有限制）
-#      max-wait: 5000ms
-#      # 连接池中的最大空闲连接
-#      max-idle: 100
-#      # 连接池中的最小空闲连接
-#      min-idle: 50
