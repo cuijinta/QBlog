@@ -12,6 +12,7 @@ spring:
     host: 47.97.179.125
     password: cjt123
     connect-timeout: 10s
+    database: 6
 #    redis配置
 #      lettuce:
 #        pool:

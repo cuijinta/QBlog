@@ -6,8 +6,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>qianye-framework</module>
-        <module>qianye-admin</module>
-        <module>qianye-blog</module>
     </modules>
     <version>1.0-SNAPSHOT</version>
     <name>QBlog Maven Webapp</name>

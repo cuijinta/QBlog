@@ -14,10 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
@@ -52,14 +54,28 @@ public class LoginServiceImpl implements LoginService {
         String token = JwtUtil.createJWT(userId);
         log.info("token:", token);
         log.info("loginUser", loginUser);
-        //把用户信息存入redis
-        redisUtils.setCacheObject("bloglogin:" + userId, loginUser);
-
+        //把用户信息存入redis (设置过期时间72小时)
+        redisUtils.setCacheObject("user_" + userId, loginUser, 72, TimeUnit.HOURS);
 
         //把token和userinfo封装 返回
         //把User转换成UserInfoVo
         UserInfoVO userInfoVo = BeanCopyUtils.copyBean(loginUser.getUser(), UserInfoVO.class);
         UserLoginVO vo = new UserLoginVO(token, userInfoVo);
         return Result.okResult(vo);
+    }
+
+    /**
+     * 用户退出登录
+     * @return
+     */
+    @Override
+    public Result logout() {
+        //获取token 解析出当前用户id
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        Long userId = loginUser.getUser().getId();
+        //删除 redis 当中的用户信息
+        redisUtils.deleteObject("user_" + userId);
+        return Result.okResult();
     }
 }
