@@ -171,3 +171,5 @@ create table if not exists qianye_blog.user
 )
     comment '用户表';
 
+# user表名修改  2024.2.16
+rename table user to sys_user;
