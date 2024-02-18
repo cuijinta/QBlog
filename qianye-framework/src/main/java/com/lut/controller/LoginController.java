@@ -5,13 +5,11 @@ import com.lut.exception.GlobalException;
 import com.lut.pojo.entity.User;
 import com.lut.result.Result;
 import com.lut.service.LoginService;
+import com.lut.service.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
@@ -22,6 +20,9 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * 登录
@@ -44,5 +45,14 @@ public class LoginController {
     @PostMapping("/logout")
     public Result logout() {
         return loginService.logout();
+    }
+
+    /**
+     * 个人信息查询
+     * @return
+     */
+    @GetMapping("/userInfo")
+    public Result userInfo() {
+        return userService.userInfo();
     }
 }

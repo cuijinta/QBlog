@@ -2,6 +2,7 @@ package com.lut.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lut.pojo.entity.User;
+import com.lut.result.Result;
 
 
 /**
@@ -12,4 +13,10 @@ import com.lut.pojo.entity.User;
  */
 public interface UserService extends IService<User> {
 
+    /**
+     * 个人信息查询
+     *
+     * @return
+     */
+    Result userInfo();
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lut.constant.AppHttpCodeEnum;
+import com.lut.constant.SystemConstants;
 import com.lut.exception.GlobalException;
 import com.lut.mapper.CommentMapper;
 import com.lut.pojo.entity.Comment;
@@ -35,16 +36,18 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     /**
      * 分页获取评论列表
      *
+     * @param commentType 评论类型
      * @param articleId 评论所属文章id
      * @param pageNum   当前页数
      * @param pageSize  每页条数
      * @return 分页列表
      */
     @Override
-    public Result commentList(Long articleId, Integer pageNum, Integer pageSize) {
+    public Result commentList(String commentType, Long articleId, Integer pageNum, Integer pageSize) {
         //根据文章id查询根评论
         LambdaQueryWrapper<Comment> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(Comment::getArticleId, articleId)
+        queryWrapper.eq(SystemConstants.ARTICLE_COMMENT.equals(commentType), Comment::getArticleId, articleId)
+                .eq(Comment::getType, commentType)
                 .orderByDesc(Comment::getCreateTime)
                 .eq(Comment::getRootId, -1);
         //分页查询

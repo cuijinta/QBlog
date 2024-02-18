@@ -15,12 +15,13 @@ public interface CommentService extends IService<Comment> {
     /**
      * 分页获取评论列表
      *
+     * @param commentType 评论类型
      * @param articleId 评论所属文章id
      * @param pageNum 当前页数
      * @param pageSize 每页条数
      * @return 分页列表
      */
-    Result commentList(Long articleId, Integer pageNum, Integer pageSize);
+    Result commentList(String commentType, Long articleId, Integer pageNum, Integer pageSize);
 
     /**
      * 发送评论
