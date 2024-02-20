@@ -15,12 +15,14 @@ public interface ArticleService extends IService<Article> {
 
     /**
      * 获取热门文章列表的方法
+     *
      * @return
      */
     Result hotArticleList();
 
     /**
      * 根据分类id查询文章的方法
+     *
      * @param pageNum
      * @param pageSize
      * @param categoryId
@@ -30,8 +32,17 @@ public interface ArticleService extends IService<Article> {
 
     /**
      * 根据文章id获取详情
+     *
      * @param id
      * @return
      */
     Result getArticleDetail(Long id);
+
+    /**
+     * 更新浏览次数
+     *
+     * @param id 文章id
+     * @return 浏览次数
+     */
+    Result updateViewCount(Long id);
 }

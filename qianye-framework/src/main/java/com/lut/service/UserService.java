@@ -14,9 +14,24 @@ import com.lut.result.Result;
 public interface UserService extends IService<User> {
 
     /**
+     * 用户注册
+     * @param user 用户实体
+     * @return 注册结果
+     */
+    Result register(User user);
+    /**
      * 个人信息查询
      *
      * @return
      */
     Result userInfo();
+
+    /**
+     * 更新用户信息
+     * @param user 用户实体
+     * @return 更新结果
+     */
+    Result updateUserInfo(User user);
+
+
 }

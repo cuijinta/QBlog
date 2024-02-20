@@ -4,6 +4,7 @@ import com.lut.constant.SystemConstants;
 import com.lut.pojo.entity.Comment;
 import com.lut.result.Result;
 import com.lut.service.CommentService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  **/
 @RestController
 @RequestMapping("/comment")
+@Api(tags="评论相关")
 public class CommentController {
 
     @Autowired

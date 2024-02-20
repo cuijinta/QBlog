@@ -15,6 +15,7 @@ import com.lut.result.Result;
 import com.lut.service.ArticleService;
 import com.lut.service.CategoryService;
 import com.lut.utils.BeanCopyUtils;
+import com.lut.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 /**
  * 文章表(Article)表服务实现类
  *
- * @author makejava
+ * @author qianye
  * @since 2023-10-23 15:36:14
  */
 @Service("articleService")
@@ -36,6 +37,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private RedisUtils redisUtils;
 
     /**
      * 获取热门文章列表的方法
@@ -101,7 +105,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         //最简化写法
         List<Article> articleList = page.getRecords();
         articleList = articleList.stream()
-                .map(article ->  article.setCategoryName(categoryService.getById(article.getCategoryId()).getName()))
+                .map(article -> article.setCategoryName(categoryService.getById(article.getCategoryId()).getName()))
                 .collect(Collectors.toList());
 
         //封装查询结果
@@ -112,6 +116,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     /**
      * 根据文章id获取详情
+     *
      * @param id
      * @return
      */
@@ -119,18 +124,35 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         //根据id查询文章
         Article article = getById(id);
 
+        //从redis中获取viewCount
+        Integer viewCount = redisUtils.getCacheMapValue("article:viewCount", id.toString());
+        article.setViewCount(viewCount.longValue());
+
         //转换成VO
         ArticleDetailVO articleDetailVO = BeanCopyUtils.copyBean(article, ArticleDetailVO.class);
 
         //查询对应的分类名称(先从拷贝后的vo当中拿出categoryId,再根据Id查询分类名称)
         Long categoryId = articleDetailVO.getCategoryId();
         Category category = categoryService.getById(categoryId);
-        if(category != null) {
+        if (category != null) {
             articleDetailVO.setCategoryName(category.getName());
         }
 
         //封装响应返回
         return Result.okResult(articleDetailVO);
+    }
+
+    /**
+     * 更新浏览次数
+     *
+     * @param id 文章id
+     * @return 浏览次数
+     */
+    @Override
+    public Result updateViewCount(Long id) {
+        //更新redis中对应 id的浏览量
+        redisUtils.incrementCacheMapValue("article:viewCount",id.toString(),1);
+        return Result.okResult();
     }
 
 }

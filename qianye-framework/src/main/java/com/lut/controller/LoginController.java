@@ -25,6 +25,16 @@ public class LoginController {
     private UserService userService;
 
     /**
+     * 用户注册
+     * @param user 用户实体
+     * @return 注册结果
+     */
+    @PostMapping("/register")
+    public Result register(@RequestBody User user) {
+        return userService.register(user);
+    }
+
+    /**
      * 登录
      * @param user 用户对象
      * @return
@@ -54,5 +64,15 @@ public class LoginController {
     @GetMapping("/userInfo")
     public Result userInfo() {
         return userService.userInfo();
+    }
+
+    /**
+     * 更新用户信息
+     * @param user 用户实体
+     * @return 更新结果
+     */
+    @PutMapping("/userInfo")
+    public Result updateUserInfo(@RequestBody User user) {
+        return userService.updateUserInfo(user);
     }
 }
