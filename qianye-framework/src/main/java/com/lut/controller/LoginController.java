@@ -1,5 +1,6 @@
 package com.lut.controller;
 
+import com.lut.annotation.SystemLog;
 import com.lut.constant.AppHttpCodeEnum;
 import com.lut.exception.GlobalException;
 import com.lut.pojo.entity.User;
@@ -72,6 +73,7 @@ public class LoginController {
      * @return 更新结果
      */
     @PutMapping("/userInfo")
+    @SystemLog(businessName = "更新用户信息")
     public Result updateUserInfo(@RequestBody User user) {
         return userService.updateUserInfo(user);
     }
