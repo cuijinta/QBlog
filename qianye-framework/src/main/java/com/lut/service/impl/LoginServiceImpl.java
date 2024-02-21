@@ -34,14 +34,15 @@ public class LoginServiceImpl implements LoginService {
     /**
      * 用户登录
      *
-     * @param user 传入的用户对象
+     * @param user     传入的用户对象
+     * @param userType 0-普通用户  1-管理员
      * @return
      */
     @Override
     @Transactional
-    public Result login(User user) {
+    public Result login(User user, String userType) {
         //封装用户名和密码为 UsernamePasswordAuthenticationToken 对象
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword());
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         //判断是否认证通过
         if (Objects.isNull(authenticate)) {
@@ -66,6 +67,7 @@ public class LoginServiceImpl implements LoginService {
 
     /**
      * 用户退出登录
+     *
      * @return
      */
     @Override

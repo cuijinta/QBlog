@@ -2,6 +2,7 @@ package com.lut.controller;
 
 import com.lut.annotation.SystemLog;
 import com.lut.constant.AppHttpCodeEnum;
+import com.lut.constant.SystemConstants;
 import com.lut.exception.GlobalException;
 import com.lut.pojo.entity.User;
 import com.lut.result.Result;
@@ -46,7 +47,7 @@ public class LoginController {
             //提示 必须要传用户名
             throw new GlobalException(AppHttpCodeEnum.REQUIRE_USERNAME);
         }
-        return loginService.login(user);
+        return loginService.login(user, SystemConstants.USER_TYPE_NORMAL);
     }
 
     /**

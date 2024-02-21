@@ -13,6 +13,15 @@ public class SystemConstants {
      * 文章的状态
      */
     public static final String CATEGORY_STATUS_NORMAL = "0";
+
+    /**
+     * 普通用户类型
+     */
+    public static final String USER_TYPE_NORMAL = "0";
+    /**
+     * 管理员用户类型
+     */
+    public static final String USER_TYPE_ADMIN = "1";
     /**
      * 友链审核通过的状态
      */
