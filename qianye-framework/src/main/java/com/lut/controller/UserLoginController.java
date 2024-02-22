@@ -13,12 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Objects;
-
 @Api(tags = "用户登录相关")
 @RestController
 @RequestMapping("/user")
-public class LoginController {
+public class UserLoginController {
 
     @Autowired
     private LoginService loginService;
