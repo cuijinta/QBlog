@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
  * 菜单权限表(Menu)表实体类
@@ -22,6 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("sys_menu")
+@Accessors(chain = true)
 public class Menu extends Model<Menu> {
     //菜单ID
     @TableId
@@ -62,7 +64,7 @@ public class Menu extends Model<Menu> {
     @TableField(exist = false)
     private String delFlag;
 //
-//    @TableField(exist = false)
-//    private List<Menu> children;
+    @TableField(exist = false)
+    private List<Menu> children;
 }
 
