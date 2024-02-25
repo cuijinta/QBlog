@@ -22,9 +22,9 @@ create table if not exists qianye_blog.qy_article
 
 create table if not exists qianye_blog.qy_article_tag
 (
-    article_id bigint auto_increment comment '文章id',
-    tag_id     bigint default 0 not null comment '标签id',
-    primary key (article_id, tag_id)
+    article_id bigint null comment '文章id',
+    tag_id     bigint null comment '标签id',
+    id bigint primary key AUTO_INCREMENT
 )
     comment '文章标签关联表';
 
@@ -136,9 +136,9 @@ create table if not exists qianye_blog.sys_role
 
 create table if not exists qianye_blog.sys_role_menu
 (
-    role_id bigint not null comment '角色ID',
-    menu_id bigint not null comment '菜单ID',
-    primary key (role_id, menu_id)
+    role_id bigint comment '角色ID',
+    menu_id bigint comment '菜单ID',
+    id bigint primary key
 )
     comment '角色和菜单关联表' charset = utf8;
 

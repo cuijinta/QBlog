@@ -23,7 +23,8 @@ public enum AppHttpCodeEnum {
     NICKNAME_EXIST(512, "昵称已存在"),
     LOGIN_ERROR(505,"用户名或密码错误"),
     PARAM_LOST(513, "参数缺失"),
-    OPERATION_ERROR(514, "错误操作");
+    OPERATION_ERROR(514, "错误操作"),
+    PARENT_NOT_ALLOW(515, "上级菜单不能为当前菜单");
 
     int code;
     String msg;

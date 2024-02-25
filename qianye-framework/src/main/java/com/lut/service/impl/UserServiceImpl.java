@@ -1,11 +1,14 @@
 package com.lut.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lut.constant.AppHttpCodeEnum;
 import com.lut.exception.GlobalException;
 import com.lut.mapper.UserMapper;
 import com.lut.pojo.entity.User;
+import com.lut.pojo.vo.PageVO;
 import com.lut.pojo.vo.UserInfoVO;
 import com.lut.result.Result;
 import com.lut.service.UserService;
@@ -89,6 +92,29 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Result updateUserInfo(User user) {
         updateById(user);
         return Result.okResult();
+    }
+
+    /**
+     * 分页获取用户对象
+     * @param pageNum 当当前页数
+     * @param pageSize 每页条数
+     * @param userName  用户名
+     * @param phonenumber 用户电话号码
+     * @param status 用户状态
+     * @return
+     */
+    @Override
+    public Result<PageVO> pageUserList(Integer pageNum, Integer pageSize, String userName, String phonenumber, String status) {
+        Page<User> page = new Page();
+        page.setCurrent(pageNum);
+        page.setSize(pageSize);
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.like(StringUtils.hasText(userName), User::getUserName, userName);
+        queryWrapper.eq(StringUtils.hasText(phonenumber), User::getPhoneNumber, phonenumber);
+        queryWrapper.eq(StringUtils.hasText(status), User::getStatus, status);
+
+        page(page, queryWrapper);
+        return Result.okResult(new PageVO(page.getRecords(), page.getTotal()));
     }
 
 

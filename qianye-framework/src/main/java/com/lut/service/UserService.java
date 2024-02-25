@@ -2,6 +2,7 @@ package com.lut.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lut.pojo.entity.User;
+import com.lut.pojo.vo.PageVO;
 import com.lut.result.Result;
 
 
@@ -34,4 +35,14 @@ public interface UserService extends IService<User> {
     Result updateUserInfo(User user);
 
 
+    /**
+     * 分页获取用户对象
+     * @param pageNum 当当前页数
+     * @param pageSize 每页条数
+     * @param userName  用户名
+     * @param phonenumber 用户电话号码
+     * @param status 用户状态
+     * @return
+     */
+    Result<PageVO> pageUserList(Integer pageNum, Integer pageSize, String userName, String phonenumber, String status);
 }

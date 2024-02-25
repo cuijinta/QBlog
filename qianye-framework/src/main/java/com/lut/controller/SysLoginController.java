@@ -8,6 +8,7 @@ import com.lut.pojo.entity.LoginUser;
 import com.lut.pojo.entity.Menu;
 import com.lut.pojo.entity.User;
 import com.lut.pojo.vo.AdminUserVO;
+import com.lut.pojo.vo.PageVO;
 import com.lut.pojo.vo.RoutersVO;
 import com.lut.pojo.vo.UserInfoVO;
 import com.lut.result.Result;
@@ -100,5 +101,10 @@ public class SysLoginController {
     @PostMapping("/sys/logout")
     public Result logout() {
         return loginService.logout(SystemConstants.USER_TYPE_ADMIN);
+    }
+
+    @GetMapping("/system/user/list")
+    public Result<PageVO> pageUserList(Integer pageNum, Integer pageSize, String userName, String phonenumber, String status) {
+        return userService.pageUserList(pageNum, pageSize, userName, phonenumber, status);
     }
 }

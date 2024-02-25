@@ -55,7 +55,7 @@ public class Article implements Serializable {
     //这里不能自动更新，否则每5秒更新一次浏览数就会导致空指针
 //    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long updateBy;
-//    @TableField(fill = FieldFill.INSERT_UPDATE)
+    //    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     //删除标志（0代表未删除，1代表已删除）

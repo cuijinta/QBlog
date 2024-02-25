@@ -3,6 +3,9 @@ package com.lut.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lut.pojo.dto.ArticleDto;
 import com.lut.pojo.entity.Article;
+import com.lut.pojo.vo.ArticleDetailVO;
+import com.lut.pojo.vo.ArticleVO;
+import com.lut.pojo.vo.PageVO;
 import com.lut.result.Result;
 
 
@@ -53,4 +56,35 @@ public interface ArticleService extends IService<Article> {
      * @return
      */
     Result add(ArticleDto article);
+
+    /**
+     * 分页获取文章
+     * @param pageNum 当前页数
+     * @param pageSize 每页条数
+     * @param title 文章名 （文章名可模糊查询）
+     * @param summary 文章摘要 （文章名可模糊查询）
+     * @return 分页对象
+     */
+    Result<PageVO> pageArticleList(Integer pageNum, Integer pageSize, String title, String summary);
+
+    /**
+     * 获取文章详情
+     * @param id 文章id
+     * @return 文章详情
+     */
+    Result<ArticleVO> getInfo(Long id);
+
+    /**
+     * 更新文章信息
+     * @param articleDto 文章请求实体
+     * @return
+     */
+    Result update(ArticleDto articleDto);
+
+    /**
+     * 根据id删除文章
+     * @param id 文章id
+     * @return
+     */
+    Result deleteById(Long id);
 }

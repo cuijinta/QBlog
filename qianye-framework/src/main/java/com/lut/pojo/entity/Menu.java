@@ -3,10 +3,7 @@ package com.lut.pojo.entity;
 import java.util.Date;
 import java.util.List;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -62,9 +59,8 @@ public class Menu extends Model<Menu> {
     //备注
     private String remark;
 
-    @TableField(exist = false)
+    @TableLogic
     private String delFlag;
-//
     @TableField(exist = false)
     private List<Menu> children;
 }

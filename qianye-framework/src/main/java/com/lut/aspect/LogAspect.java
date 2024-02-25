@@ -83,5 +83,4 @@ public class LogAspect {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         return methodSignature.getMethod().getAnnotation(SystemLog.class);
     }
-
 }
