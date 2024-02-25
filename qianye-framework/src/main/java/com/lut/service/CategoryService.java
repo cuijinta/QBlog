@@ -19,4 +19,10 @@ public interface CategoryService extends IService<Category> {
      * @return
      */
     Result getCategoryList();
+
+    /**
+     * 获取文章列表(后台需要列出所有分类)
+     * @return
+     */
+    Result getAllCategory();
 }

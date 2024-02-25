@@ -3,6 +3,7 @@ package com.lut.pojo.entity;
 import java.util.Date;
 import java.util.List;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -50,13 +51,13 @@ public class Menu extends Model<Menu> {
     private String perms;
     //菜单图标
     private String icon;
-    //创建者
+    @TableField(fill = FieldFill.INSERT)
     private Long createBy;
-    //创建时间
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
-    //更新者
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long updateBy;
-    //更新时间
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
     //备注
     private String remark;

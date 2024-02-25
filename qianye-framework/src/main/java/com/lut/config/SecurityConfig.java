@@ -60,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/login").anonymous()
                 .antMatchers("/sys/login").anonymous()
                 .antMatchers("/user/logout").authenticated()   //注销接口只能登录后请求
+                .antMatchers("/sys/logout").authenticated()   //注销接口只能登录后请求
                 .antMatchers("/comment").authenticated()
                 .antMatchers("/user/userInfo").authenticated()
 //                .antMatchers("/sys/getInfo").authenticated()

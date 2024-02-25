@@ -19,20 +19,28 @@ import javax.servlet.ServletRequest;
  **/
 @RestController
 @Api(tags = "文章分类")
-@RequestMapping("/category")
+@RequestMapping
 public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
 
     /**
-     * 获取分类列表
+     * 获取分类列表 (前台只展示有文章的分类)
      *
      * @return
      */
-    @GetMapping("/getCategoryList")
+    @GetMapping("/category/getCategoryList")
     public Result getCategoryList() {
         return categoryService.getCategoryList();
     }
 
+    /**
+     * 获取文章列表(后台需要列出所有分类)
+     * @return
+     */
+    @GetMapping("/content/category/listAllCategory")
+    public Result getAllCategory() {
+        return categoryService.getAllCategory();
+    }
 }

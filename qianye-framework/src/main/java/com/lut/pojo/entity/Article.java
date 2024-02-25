@@ -2,13 +2,11 @@ package com.lut.pojo.entity;
 
 import java.util.Date;
 import java.io.Serializable;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableLogic;
+
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.experimental.Accessors;
 
 /**
@@ -50,12 +48,14 @@ public class Article implements Serializable {
     //是否允许评论 1是，0否
     private String isComment;
 
+    @TableField(fill = FieldFill.INSERT)
     private Long createBy;
-
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
-
+    //这里不能自动更新，否则每5秒更新一次浏览数就会导致空指针
+//    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long updateBy;
-
+//    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     //删除标志（0代表未删除，1代表已删除）

@@ -6,15 +6,17 @@ import lombok.NoArgsConstructor;
 
 /**
  * @Author 浅夜
- * @Description 分类响应对象
- * @DateTime 2023/10/25 16:52
+ * @Description 标签响应对象
+ * @DateTime 2024/2/25 11:57
  **/
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryVO {
+public class TagVO {
     private Long id;
+    /**
+     * 标签名
+     */
     private String name;
-    private String description;
+    private String remark;
 }

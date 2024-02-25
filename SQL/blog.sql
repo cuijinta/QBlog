@@ -173,3 +173,9 @@ create table if not exists qianye_blog.user
 
 # user表名修改  2024.2.16
 rename table user to sys_user;
+
+# 2024.2.25 数据库创建时间与更新时间设置
+alter table qy_tag
+    modify update_time datetime default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP;
+alter table qy_tag
+    modify create_time datetime default CURRENT_TIMESTAMP null;

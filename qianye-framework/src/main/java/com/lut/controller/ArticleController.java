@@ -1,5 +1,6 @@
 package com.lut.controller;
 
+import com.lut.pojo.dto.ArticleDto;
 import com.lut.result.Result;
 import com.lut.service.ArticleService;
 import io.swagger.annotations.Api;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(tags = "文章相关")
-@RequestMapping("/article")
+@RequestMapping
 public class ArticleController {
 
     @Autowired
@@ -18,7 +19,7 @@ public class ArticleController {
      * 查询热门文章功能
      * @return
      */
-    @GetMapping("/hotArticleList")
+    @GetMapping("/article/hotArticleList")
     public Result hotArticleList() {
         //查询热门文章
         Result result = articleService.hotArticleList();
@@ -32,7 +33,7 @@ public class ArticleController {
      * @param categoryId
      * @return
      */
-    @GetMapping("/articleList")
+    @GetMapping("/article/articleList")
     public Result articleList(Integer pageNum, Integer pageSize, Long categoryId) {
         return articleService.articleList(pageNum, pageSize, categoryId);
     }
@@ -42,7 +43,7 @@ public class ArticleController {
      * @param id
      * @return
      */
-    @GetMapping("/{id}")
+    @GetMapping("/article/{id}")
     public Result getArticleDetail(@PathVariable("id") Long id) {
         return articleService.getArticleDetail(id);
     }
@@ -54,8 +55,18 @@ public class ArticleController {
      * @param id 文章id
      * @return 浏览次数
      */
-    @PutMapping("/updateViewCount/{id}")
+    @PutMapping("/article/updateViewCount/{id}")
     public Result updateViewCount(@PathVariable("id") Long id) {
         return articleService.updateViewCount(id);
+    }
+
+    /**
+     * 写文章
+     * @param article 文章请求对象
+     * @return
+     */
+    @PostMapping("/content/article")
+    public Result add(@RequestBody ArticleDto article) {
+        return articleService.add(article);
     }
 }

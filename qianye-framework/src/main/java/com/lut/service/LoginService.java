@@ -16,5 +16,5 @@ public interface LoginService {
      * 用户登出
      * @return
      */
-    Result logout();
+    Result logout(String userType);
 }

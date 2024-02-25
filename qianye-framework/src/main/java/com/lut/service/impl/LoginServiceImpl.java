@@ -1,5 +1,6 @@
 package com.lut.service.impl;
 
+import com.lut.constant.SystemConstants;
 import com.lut.pojo.entity.LoginUser;
 import com.lut.pojo.entity.User;
 import com.lut.pojo.vo.UserInfoVO;
@@ -54,9 +55,13 @@ public class LoginServiceImpl implements LoginService {
         String userId = loginUser.getUser().getId().toString();
         String token = JwtUtil.createJWT(userId);
         log.info("token:", token);
-        log.info("loginUser", loginUser);
-        //把用户信息存入redis (设置过期时间72小时)
-        redisUtils.setCacheObject("user_" + userId, loginUser, 72, TimeUnit.HOURS);
+        log.info("loginUser:", loginUser);
+        //根据用户身份将用户信息存入redis (设置过期时间72小时)
+        if(userType.equals(SystemConstants.USER_TYPE_NORMAL)) {
+            redisUtils.setCacheObject("user_" + userId, loginUser, 72, TimeUnit.HOURS);
+        } else if(userType.equals(SystemConstants.USER_TYPE_ADMIN)) {
+            redisUtils.setCacheObject("admin_" + userId, loginUser, 72, TimeUnit.HOURS);
+        }
 
         //把token和userinfo封装 返回
         //把User转换成UserInfoVo
@@ -71,13 +76,18 @@ public class LoginServiceImpl implements LoginService {
      * @return
      */
     @Override
-    public Result logout() {
+    public Result logout(String userType) {
         //获取token 解析出当前用户id
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         Long userId = loginUser.getUser().getId();
         //删除 redis 当中的用户信息
-        redisUtils.deleteObject("user_" + userId);
+        if(userType.equals(SystemConstants.USER_TYPE_NORMAL)) {
+            redisUtils.deleteObject("user_" + userId);
+        } else if(userType.equals(SystemConstants.USER_TYPE_ADMIN)) {
+            redisUtils.deleteObject("admin_" + userId);
+        }
+
         return Result.okResult();
     }
 }

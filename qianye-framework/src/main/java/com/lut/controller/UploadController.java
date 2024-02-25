@@ -4,10 +4,10 @@ import com.lut.result.Result;
 import com.lut.service.UploadService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * @Description 文件上传控制器
@@ -29,7 +29,7 @@ public class UploadController {
      * @return 上传结果
      */
     @PostMapping("/upload")
-    public Result uploadImg(MultipartFile img) {
+    public Result uploadImg(@RequestParam("img") MultipartFile img) {
         return uploadService.uploadImg(img);
     }
 }

@@ -2,6 +2,7 @@ package com.lut.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.lut.constant.AppHttpCodeEnum;
 import com.lut.constant.SystemConstants;
 import com.lut.mapper.CategoryMapper;
 import com.lut.pojo.entity.Article;
@@ -11,6 +12,7 @@ import com.lut.result.Result;
 import com.lut.service.ArticleService;
 import com.lut.service.CategoryService;
 import com.lut.utils.BeanCopyUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,5 +56,19 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
        //4.封装VO
         List<CategoryVO> categoryVOList = BeanCopyUtils.copyBeanList(categories, CategoryVO.class);
         return Result.okResult(categoryVOList);
+    }
+
+    /**
+     * 获取文章列表(后台需要列出所有分类)
+     * @return
+     */
+    @Override
+    public Result getAllCategory() {
+        List<Category> categoryList = list();
+        if(CollectionUtils.isNotEmpty(categoryList)) {
+            List<CategoryVO> categoryVOs = BeanCopyUtils.copyBeanList(categoryList, CategoryVO.class);
+            return Result.okResult(categoryVOs);
+        }
+        return Result.okResult();
     }
 }

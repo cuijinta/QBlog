@@ -1,6 +1,7 @@
 package com.lut.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lut.pojo.dto.ArticleDto;
 import com.lut.pojo.entity.Article;
 import com.lut.result.Result;
 
@@ -45,4 +46,11 @@ public interface ArticleService extends IService<Article> {
      * @return 浏览次数
      */
     Result updateViewCount(Long id);
+
+    /**
+     * 写文章
+     * @param article 文章请求对象
+     * @return
+     */
+    Result add(ArticleDto article);
 }

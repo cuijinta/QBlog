@@ -54,7 +54,7 @@ public class UserLoginController {
      */
     @PostMapping("/logout")
     public Result logout() {
-        return loginService.logout();
+        return loginService.logout(SystemConstants.USER_TYPE_ADMIN);
     }
 
     /**

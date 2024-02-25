@@ -84,6 +84,10 @@ public class SysLoginController {
         return Result.okResult(adminUserVO);
     }
 
+    /**
+     * 获取当前用户的路由
+     * @return
+     */
     @GetMapping("getRouters")
     public Result<RoutersVO> getRouters() {
         Long userId = SecurityUtils.getUserId();
@@ -93,5 +97,8 @@ public class SysLoginController {
         return Result.okResult(new RoutersVO(menus));
     }
 
-
+    @PostMapping("/sys/logout")
+    public Result logout() {
+        return loginService.logout(SystemConstants.USER_TYPE_ADMIN);
+    }
 }
