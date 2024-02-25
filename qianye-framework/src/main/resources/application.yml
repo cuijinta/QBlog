@@ -29,6 +29,6 @@ mybatis-plus:
       id-type: auto # 主键自增
 
 oss:
-  accessKey: tSMwMWesEtTTRrB8TCWW37wTsKYgpspq9qkUWly6
-  secretKey: cOBDcjvANU2-VcSZHDN92yN3cm1BnAWSU-ZVa6N-
+  accessKey: xxx
+  secretKey: xxx
   bucket: qianye-blog
