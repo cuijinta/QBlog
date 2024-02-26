@@ -8,15 +8,20 @@ import com.lut.constant.SystemConstants;
 import com.lut.exception.GlobalException;
 import com.lut.mapper.MenuMapper;
 import com.lut.pojo.entity.Menu;
+import com.lut.pojo.entity.RoleMenu;
 import com.lut.pojo.vo.MenuBranchVO;
 import com.lut.pojo.vo.MenuVO;
 import com.lut.pojo.vo.PageVO;
 import com.lut.result.Result;
 import com.lut.service.MenuService;
+import com.lut.service.RoleMenuService;
 import com.lut.utils.BeanCopyUtils;
 import com.lut.utils.SecurityUtils;
+import io.jsonwebtoken.lang.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -34,6 +39,9 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Autowired
     private MenuMapper menuMapper;
+
+    @Autowired
+    private RoleMenuService roleMenuService;
 
     @Override
     public List<String> selectPermsByUserId(Long id) {
@@ -102,9 +110,10 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
      */
     @Override
     public Result pageMenuList(String menuName, String status) {
-        LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(StringUtils.hasText(menuName), Menu::getMenuName, menuName);
-        queryWrapper.eq(StringUtils.hasText(status), Menu::getStatus, status);
+        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.hasText(menuName), "menu_name", menuName);
+        queryWrapper.eq(StringUtils.hasText(status), "status", status);
+        queryWrapper.orderByAsc("order_num");
         List<Menu> list = list(queryWrapper);
         return Result.okResult(list);
     }
@@ -125,13 +134,18 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     /**
      * 根据id删除菜单
-     * @param id
+     * @param ids
      * @return
      */
     @Override
-    public Result delete(Long id) {
-        int update = menuMapper.deleteById(id);
-        return update > 0 ? Result.okResult() : Result.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
+    @Transactional
+    public Result delete(Long[] ids) {
+        int update = menuMapper.deleteBatchIds(Collections.arrayToList(ids));
+        QueryWrapper<RoleMenu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("menu_id", ids);
+        roleMenuService.remove(queryWrapper);
+
+        return update == ids.length ? Result.okResult() : Result.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
     }
 
     /**
@@ -168,6 +182,54 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
                 .collect(Collectors.toList());
 
         return Result.okResult(menuBranchVOList);
+    }
+
+    /**
+     * 根据角色id获取对应角色的菜单树
+     * @param id 角色id
+     * @return
+     */
+    @Override
+    public Result<MenuBranchVO> getSelectList(Long id) {
+        //获得该角色的菜单id列表
+        QueryWrapper<RoleMenu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("role_id", id);
+        List<RoleMenu> roleMenuList = roleMenuService.list();
+        if(CollectionUtils.isEmpty(roleMenuList)) return Result.okResult(new ArrayList<MenuBranchVO>());
+        List<Long> menuIds = roleMenuList.stream().map(RoleMenu::getMenuId).collect(Collectors.toList());
+
+        //根据菜单id列表获取菜单列表
+        QueryWrapper<Menu> queryWrapper1 = new QueryWrapper<>();
+        queryWrapper1.in("id", menuIds);
+        List<Menu> menuList = list(queryWrapper1);
+
+        //顶级菜单响应对象列表
+        List<MenuBranchVO> voList = menuList.stream()
+                .filter(menu -> menu.getParentId().equals(0L))
+                .map(menu -> {
+                    MenuBranchVO menuBranchVO = new MenuBranchVO();
+                    menuBranchVO.setId(menu.getId());
+                    menuBranchVO.setLabel(menu.getMenuName());
+                    menuBranchVO.setParentId(menu.getParentId());
+                    return menuBranchVO;
+                }).collect(Collectors.toList());
+
+        //二级和三级列表
+        List<MenuBranchVO> menuBranchVOList1 = menuList.stream()
+                .filter(menu -> !menu.getParentId().equals(0L))
+                .map(menu -> {
+                    MenuBranchVO menuBranchVO = new MenuBranchVO();
+                    menuBranchVO.setId(menu.getId());
+                    menuBranchVO.setLabel(menu.getMenuName());
+                    menuBranchVO.setParentId(menu.getParentId());
+                    return menuBranchVO;
+                }).collect(Collectors.toList());
+
+        List<MenuBranchVO> res = voList.stream()
+                .peek(menu -> menu.setChildren(getChildren(menuBranchVOList1, menu))) // 为每个根菜单项设置子菜单
+                .collect(Collectors.toList());
+
+        return Result.okResult(res);
     }
 
     // 获取子菜单

@@ -25,7 +25,7 @@ public interface RoleService extends IService<Role> {
     /**
      * 改变角色状态
      * @param roleId
-     * @param state
+     * @param status
      * @return
      */
     Result changeState(Long roleId, String status);
@@ -43,4 +43,19 @@ public interface RoleService extends IService<Role> {
      * @return
      */
     Result update(RoleDto roleDto);
+
+    /**
+     * 根据id获取角色信息
+     * @param id
+     * @return
+     */
+    Result getInfo(Long id);
+
+    /**
+     * 根据id删除角色
+     *
+     * @param id
+     * @return
+     */
+    Result delete(Long[] id);
 }

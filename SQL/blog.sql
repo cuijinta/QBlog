@@ -138,7 +138,7 @@ create table if not exists qianye_blog.sys_role_menu
 (
     role_id bigint comment '角色ID',
     menu_id bigint comment '菜单ID',
-    id bigint primary key
+    id bigint  primary key
 )
     comment '角色和菜单关联表' charset = utf8;
 
@@ -179,3 +179,10 @@ alter table qy_tag
     modify update_time datetime default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP;
 alter table qy_tag
     modify create_time datetime default CURRENT_TIMESTAMP null;
+
+# 2024.2.26 修改bug,设置角色菜单表主键自增
+alter table sys_role_menu
+    modify id bigint auto_increment;
+
+alter table sys_role_menu
+    auto_increment = 1;

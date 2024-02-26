@@ -2,11 +2,11 @@ package com.lut.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lut.constant.AppHttpCodeEnum;
 import com.lut.mapper.RoleMapper;
-import com.lut.mapper.RoleMenuMapper;
 import com.lut.pojo.dto.RoleDto;
 import com.lut.pojo.entity.Role;
 import com.lut.pojo.entity.RoleMenu;
@@ -23,6 +23,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 角色信息表(Role)表服务实现类
@@ -61,9 +62,10 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
      */
     @Override
     public Result<PageVO> pageRoleList(Integer pageNum, Integer pageSize, String roleName, String status) {
-        LambdaQueryWrapper<Role> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(StringUtils.hasText(roleName), Role::getRoleName, roleName);
-        queryWrapper.eq(StringUtils.hasText(roleName), Role::getStatus, status);
+        QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.hasText(roleName), "role_name", roleName);
+        queryWrapper.eq(StringUtils.hasText(roleName), "status", status);
+        queryWrapper.orderByAsc("role_sort");
 
         Page<Role> page = new Page<>();
         page.setCurrent(pageNum);
@@ -95,6 +97,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     @Transactional
     public Result add(RoleDto roleDto) {
         Role role = BeanCopyUtils.copyBean(roleDto, Role.class);
+//        role.setId(null);
         roleMapper.insert(role); //创建后可以使用它的id
         List<Long> menuIds = roleDto.getMenuIds();
         if(CollectionUtils.isEmpty(menuIds)) return Result.okResult();
@@ -127,5 +130,40 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             roleMenuService.save(new RoleMenu(null, role.getId(), menuId));
         });
         return Result.okResult();
+    }
+
+    /**
+     * 根据id获取角色信息
+     * @param id 角色id
+     * @return
+     */
+    @Override
+    public Result getInfo(Long id) {
+        Role role = getById(id);
+        if(ObjectUtils.isNull(role)) return Result.okResult();
+        RoleDto roleDto = BeanCopyUtils.copyBean(role, RoleDto.class);
+        QueryWrapper<RoleMenu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("role_id", id);
+        List<RoleMenu> roleMenuList = roleMenuService.list(queryWrapper);
+        List<Long> menuIds = roleMenuList.stream().map(RoleMenu::getMenuId).collect(Collectors.toList());
+        roleDto.setMenuIds(menuIds);
+
+        return Result.okResult(roleDto);
+    }
+
+    /**
+     * 根据id删除角色
+     *
+     * @param ids 角色id列表
+     * @return
+     */
+    @Override
+    @Transactional
+    public Result delete(Long[] ids) {
+        int delete = roleMapper.deleteBatchIds(CollectionUtils.arrayToList(ids));
+        QueryWrapper<RoleMenu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("role_id", ids);
+        roleMenuService.remove(queryWrapper);
+        return delete > 0 ? Result.okResult() : Result.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
     }
 }

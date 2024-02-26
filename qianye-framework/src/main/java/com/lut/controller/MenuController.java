@@ -63,12 +63,12 @@ public class MenuController {
 
     /**
      * 根据id删除菜单
-     * @param id
+     * @param ids
      * @return
      */
     @DeleteMapping("/menu/{id}")
-    public Result delete(@PathVariable Long id) {
-        return menuService.delete(id);
+    public Result delete(@PathVariable Long[] ids) {
+        return menuService.delete(ids);
     }
 
     @GetMapping("/menu/treeselect")
@@ -76,6 +76,16 @@ public class MenuController {
         return menuService.getSelectList();
     }
 
+
+    /**
+     * 根据角色id获取对应角色的菜单树
+     * @param id 角色id
+     * @return
+     */
+    @GetMapping("/menu/roleMenuTreeselect/{id}")
+    public Result getSelectListById(@PathVariable Long id) {
+        return menuService.getSelectList(id);
+    }
 
 
 }

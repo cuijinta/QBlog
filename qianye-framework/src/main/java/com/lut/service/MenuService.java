@@ -2,6 +2,7 @@ package com.lut.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lut.pojo.entity.Menu;
+import com.lut.pojo.vo.MenuBranchVO;
 import com.lut.pojo.vo.MenuVO;
 import com.lut.pojo.vo.PageVO;
 import com.lut.result.Result;
@@ -59,12 +60,19 @@ public interface MenuService extends IService<Menu> {
      * @param id
      * @return
      */
-    Result delete(Long id);
+    Result delete(Long[] ids);
 
     /**
      * 获取菜单树
      * @return
      */
     Result getSelectList();
+
+    /**
+     * 根据角色id获取对应角色的菜单树
+     * @param id 角色id
+     * @return
+     */
+    Result<MenuBranchVO> getSelectList(Long id);
 }
 
