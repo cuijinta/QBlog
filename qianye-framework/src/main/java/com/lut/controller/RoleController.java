@@ -7,7 +7,6 @@ import com.lut.pojo.vo.PageVO;
 import com.lut.result.Result;
 import com.lut.service.RoleService;
 import io.swagger.annotations.Api;
-import net.sf.jsqlparser.expression.LongValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -76,5 +75,14 @@ public class RoleController {
     @GetMapping("/role/{id}")
     public Result Info(@PathVariable Long id) {
         return roleService.getInfo(id);
+    }
+
+    /**
+     * 获取全部角色
+     * @return
+     */
+    @GetMapping("/role/listAllRole")
+    public Result listAllRole() {
+        return roleService.getRoleList();
     }
 }

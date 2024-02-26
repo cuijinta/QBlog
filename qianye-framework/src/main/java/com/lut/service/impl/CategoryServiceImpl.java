@@ -1,6 +1,8 @@
 package com.lut.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lut.constant.AppHttpCodeEnum;
 import com.lut.constant.SystemConstants;
@@ -8,13 +10,15 @@ import com.lut.mapper.CategoryMapper;
 import com.lut.pojo.entity.Article;
 import com.lut.pojo.entity.Category;
 import com.lut.pojo.vo.CategoryVO;
+import com.lut.pojo.vo.PageVO;
 import com.lut.result.Result;
 import com.lut.service.ArticleService;
 import com.lut.service.CategoryService;
 import com.lut.utils.BeanCopyUtils;
-import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -31,6 +35,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
     @Autowired
     private ArticleService articleService;
+
+    @Autowired
+    private CategoryMapper categoryMapper;
     /**
      * 获取分类列表
      * @return
@@ -65,10 +72,39 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Override
     public Result getAllCategory() {
         List<Category> categoryList = list();
-        if(CollectionUtils.isNotEmpty(categoryList)) {
+        if(!CollectionUtils.isEmpty(categoryList)) {
             List<CategoryVO> categoryVOs = BeanCopyUtils.copyBeanList(categoryList, CategoryVO.class);
             return Result.okResult(categoryVOs);
         }
+        return Result.okResult();
+    }
+
+    @Override
+    public Result<PageVO> pageCategoryList(Integer pageNum, Integer pageSize, String name, String status) {
+        Page<Category> page = new Page<>();
+        page.setCurrent(pageNum);
+        page.setSize(pageSize);
+
+        LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.like(StringUtils.hasText(name), Category::getName, name);
+        queryWrapper.eq(StringUtils.hasText(status), Category::getStatus, status);
+        page(page, queryWrapper);
+
+        return Result.okResult(new PageVO(page.getRecords(), page.getTotal()));
+    }
+
+
+
+    @Override
+    public Result delete(Long[] ids) {
+        if(ids.length == 0) return Result.errorResult(AppHttpCodeEnum.OPERATION_ERROR);
+        List<Long> idList = (List<Long>) CollectionUtils.arrayToList(ids);
+        categoryMapper.deleteBatchIds(idList);
+        idList.forEach(cateId -> {
+            LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
+            queryWrapper.eq(Article::getCategoryId, cateId);
+            articleService.remove(queryWrapper);
+        });
         return Result.okResult();
     }
 }

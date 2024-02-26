@@ -4,17 +4,18 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson.JSON;
 import com.lut.constant.AppHttpCodeEnum;
 import com.lut.pojo.entity.Category;
+import com.lut.pojo.vo.CategoryVO;
 import com.lut.pojo.vo.ExcelCategoryVO;
+import com.lut.pojo.vo.PageVO;
 import com.lut.result.Result;
 import com.lut.service.CategoryService;
 import com.lut.utils.BeanCopyUtils;
 import com.lut.utils.WebUtils;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -78,4 +79,34 @@ public class CategoryController {
             WebUtils.renderString(response, JSON.toJSONString(result));
         }
     }
+
+    @GetMapping("content/category/list")
+    public Result<PageVO> pageCategoryList(Integer pageNum, Integer pageSize, String name, String status) {
+        return categoryService.pageCategoryList(pageNum, pageSize, name, status);
+    }
+
+    @PostMapping("/content/category")
+    public Result save(@RequestBody Category category) {
+        boolean save = categoryService.save(category);
+        return save ? Result.okResult() : Result.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
+    }
+
+    @GetMapping("content/category/{id}")
+    public Result getInfo(@PathVariable Long id) {
+        Category category = categoryService.getById(id);
+        return Result.okResult(category);
+    }
+
+    @PutMapping("/content/category")
+    public Result update(@RequestBody Category category) {
+        categoryService.updateById(category);
+        return Result.okResult();
+    }
+
+    @DeleteMapping("/content/category/{ids}")
+    public Result delete(@PathVariable Long[] ids) {
+        return categoryService.delete(ids);
+    }
+
+
 }

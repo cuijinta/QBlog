@@ -58,4 +58,10 @@ public interface RoleService extends IService<Role> {
      * @return
      */
     Result delete(Long[] id);
+
+    /**
+     * 获取全部角色
+     * @return
+     */
+    Result getRoleList();
 }

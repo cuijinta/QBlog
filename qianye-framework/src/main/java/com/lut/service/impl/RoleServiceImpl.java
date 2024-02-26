@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lut.constant.AppHttpCodeEnum;
+import com.lut.constant.SystemConstants;
 import com.lut.mapper.RoleMapper;
 import com.lut.pojo.dto.RoleDto;
 import com.lut.pojo.entity.Role;
@@ -165,5 +166,17 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         queryWrapper.in("role_id", ids);
         roleMenuService.remove(queryWrapper);
         return delete > 0 ? Result.okResult() : Result.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
+    }
+
+    /**
+     * 获取全部角色
+     * @return
+     */
+    @Override
+    public Result getRoleList() {
+        QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("status", SystemConstants.ROLE_STATUS_NORMAL);
+        List<Role> list = list(queryWrapper);
+        return Result.okResult(list);
     }
 }

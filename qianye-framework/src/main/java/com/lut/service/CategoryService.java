@@ -3,6 +3,7 @@ package com.lut.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lut.pojo.entity.Category;
+import com.lut.pojo.vo.PageVO;
 import com.lut.result.Result;
 
 
@@ -25,4 +26,8 @@ public interface CategoryService extends IService<Category> {
      * @return
      */
     Result getAllCategory();
+
+    Result<PageVO> pageCategoryList(Integer pageNum, Integer pageSize, String name, String status);
+
+    Result delete(Long[] ids);
 }

@@ -1,6 +1,8 @@
 package com.lut.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lut.pojo.dto.UserDto;
+import com.lut.pojo.dto.UserStatusDto;
 import com.lut.pojo.entity.User;
 import com.lut.pojo.vo.PageVO;
 import com.lut.result.Result;
@@ -45,4 +47,30 @@ public interface UserService extends IService<User> {
      * @return
      */
     Result<PageVO> pageUserList(Integer pageNum, Integer pageSize, String userName, String phonenumber, String status);
+
+    /**
+     * 新增后台系统用户
+     * @param userDto 用户请求对象
+     * @return
+     */
+    Result addUser(UserDto userDto);
+
+    /**
+     * 改变用户状态
+     * @param userStatusDto 用户状态请求体
+     * @return
+     */
+    Result changeStatus(UserStatusDto userStatusDto);
+
+    Result getInfo(Long id);
+
+    /**
+     * 更新系统用户
+     * @param userDto 用户请求实体
+     * @return
+     */
+    Result updateInfo(UserDto userDto);
+
+
+    Result delteBatch(Long[] ids);
 }

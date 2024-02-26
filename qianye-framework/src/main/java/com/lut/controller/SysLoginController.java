@@ -4,6 +4,8 @@ import com.lut.annotation.SystemLog;
 import com.lut.constant.AppHttpCodeEnum;
 import com.lut.constant.SystemConstants;
 import com.lut.exception.GlobalException;
+import com.lut.pojo.dto.UserDto;
+import com.lut.pojo.dto.UserStatusDto;
 import com.lut.pojo.entity.LoginUser;
 import com.lut.pojo.entity.Menu;
 import com.lut.pojo.entity.User;
@@ -106,5 +108,57 @@ public class SysLoginController {
     @GetMapping("/system/user/list")
     public Result<PageVO> pageUserList(Integer pageNum, Integer pageSize, String userName, String phonenumber, String status) {
         return userService.pageUserList(pageNum, pageSize, userName, phonenumber, status);
+    }
+
+    /**
+     * 新增后台系统用户
+     * @param userDto 用户请求对象
+     * @return
+     */
+    @PostMapping("/system/user")
+    public Result add(@RequestBody UserDto userDto) {
+        return userService.addUser(userDto);
+    }
+
+    /**
+     * 改变用户状态
+     * @param userStatusDto
+     * @return
+     */
+    @PutMapping("/system/user/changeStatus")
+    public Result changeUserStatus(@RequestBody UserStatusDto userStatusDto) {
+        return userService.changeStatus(userStatusDto);
+    }
+
+    /**
+     * 根据id获取用户信息（包含角色信息）
+     * @param id
+     * @return
+     */
+    @GetMapping("/system/user/{id}")
+    public Result getInfo(@PathVariable Long id) {
+        return userService.getInfo(id);
+    }
+
+
+    /**
+     * 更新系统用户
+     * @param userDto 用户请求实体
+     * @return
+     */
+    @PutMapping("/system/user")
+    public Result updateInfo(@RequestBody UserDto userDto) {
+        return userService.updateInfo(userDto);
+    }
+
+    /**
+     *
+     * 用户批量删除
+     * @param ids id
+     * @return
+     */
+    @DeleteMapping("/system/user/{ids}")
+    public Result delete(@PathVariable Long[] ids) {
+        return userService.delteBatch(ids);
     }
 }

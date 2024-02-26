@@ -46,4 +46,8 @@ public class SystemConstants {
      * 正常状态
      */
     public static final String STATUS_NORMAL = "0";
+    /**
+     * 角色正常状态
+     */
+    public static final Object ROLE_STATUS_NORMAL = "0";
 }

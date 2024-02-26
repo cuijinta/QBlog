@@ -144,9 +144,9 @@ create table if not exists qianye_blog.sys_role_menu
 
 create table if not exists qianye_blog.sys_user_role
 (
-    user_id bigint not null comment '用户ID',
-    role_id bigint not null comment '角色ID',
-    primary key (user_id, role_id)
+    id bigint primary key auto_increment not null,
+    user_id bigint comment '用户ID',
+    role_id bigint comment '角色ID'
 )
     comment '用户和角色关联表' charset = utf8;
 

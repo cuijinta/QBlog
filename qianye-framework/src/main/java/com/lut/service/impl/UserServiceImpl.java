@@ -7,17 +7,35 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lut.constant.AppHttpCodeEnum;
 import com.lut.exception.GlobalException;
 import com.lut.mapper.UserMapper;
+import com.lut.pojo.dto.UserDto;
+import com.lut.pojo.dto.UserStatusDto;
+import com.lut.pojo.entity.Role;
 import com.lut.pojo.entity.User;
+import com.lut.pojo.entity.UserRole;
 import com.lut.pojo.vo.PageVO;
 import com.lut.pojo.vo.UserInfoVO;
+import com.lut.pojo.vo.UserRoleVO;
+import com.lut.pojo.vo.UserVO;
 import com.lut.result.Result;
+import com.lut.service.RoleService;
+import com.lut.service.UserRoleService;
 import com.lut.service.UserService;
 import com.lut.utils.BeanCopyUtils;
 import com.lut.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 
 
 /**
@@ -31,6 +49,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private UserRoleService userRoleService;
+
+    @Autowired
+    private RoleService roleService;
 
     /**
      * 用户注册
@@ -117,6 +144,143 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return Result.okResult(new PageVO(page.getRecords(), page.getTotal()));
     }
 
+    /**
+     * 新增后台系统用户
+     * @param userDto 用户请求对象
+     * @return
+     */
+    @Override
+    @Transactional
+    public Result addUser(UserDto userDto) {
+
+        if(!StringUtils.hasText(userDto.getUserName())){
+            throw new GlobalException(AppHttpCodeEnum.USERNAME_NOT_NULL);
+        }
+        if(!StringUtils.hasText(userDto.getPassword())){
+            throw new GlobalException(AppHttpCodeEnum.PASSWORD_NOT_NULL);
+        }
+        if(!StringUtils.hasText(userDto.getEmail())){
+            throw new GlobalException(AppHttpCodeEnum.EMAIL_NOT_NULL);
+        }
+        if(!StringUtils.hasText(userDto.getNickName())){
+            throw new GlobalException(AppHttpCodeEnum.NICKNAME_NOT_NULL);
+        }
+        //对数据进行是否存在的判断
+        if(userNameExist(userDto.getUserName())){
+            throw new GlobalException(AppHttpCodeEnum.USERNAME_EXIST);
+        }
+        if(nickNameExist(userDto.getNickName())){
+            throw new GlobalException(AppHttpCodeEnum.NICKNAME_EXIST);
+        }
+        if(StringUtils.hasText(userDto.getPhoneNumber()) && phoneNumberExist(userDto.getPhoneNumber())){
+            throw new GlobalException(AppHttpCodeEnum.PHONE_EXIST);
+        }
+        if(StringUtils.hasText(userDto.getEmail()) && emailExist(userDto.getEmail())) {
+            throw new GlobalException(AppHttpCodeEnum.EMAIL_EXIST);
+        }
+        User user = BeanCopyUtils.copyBean(userDto, User.class);
+        //...
+        //对密码进行加密
+        String encodePassword = passwordEncoder.encode(userDto.getPassword());
+        user.setPassword(encodePassword);
+        int insert = userMapper.insert(user);
+        List<Long> roleIds = userDto.getRoleIds();
+        if(CollectionUtils.isEmpty(roleIds)) {
+            return insert > 0 ? Result.okResult() : Result.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
+        }
+        roleIds.forEach(roleId -> {
+            userRoleService.save(new UserRole(null, user.getId(), roleId));
+        });
+
+        return insert > 0 ? Result.okResult() : Result.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
+    }
+
+    @Override
+    public Result changeStatus(UserStatusDto userStatusDto) {
+        Long userId = userStatusDto.getUserId();
+        String status = userStatusDto.getStatus();
+        Long updateBy = SecurityUtils.getUserId();
+        User user = getById(userId);
+        user.setStatus(status);
+        boolean update = updateById(user);
+        return update ? Result.okResult() : Result.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
+    }
+
+    @Override
+    public Result getInfo(Long id) {
+        User user = getById(id);
+        UserVO userVO = BeanCopyUtils.copyBean(user, UserVO.class);
+
+        List<Long> roleIds = new ArrayList<>();
+        QueryWrapper<UserRole> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", id);
+        List<UserRole> userRoleList = userRoleService.list(queryWrapper);
+        if(!CollectionUtils.isEmpty(userRoleList)) {
+            roleIds = userRoleList.stream().map(UserRole::getRoleId).collect(Collectors.toList());
+        }
+        List<Role> roleList = new ArrayList<>();
+        QueryWrapper<Role> queryWrapper1 = new QueryWrapper<>();
+        if(!CollectionUtils.isEmpty(roleIds)) {
+            queryWrapper1.in("id", roleIds);
+            roleList = roleService.list(queryWrapper1);
+        }
+        UserRoleVO userRoleVO = new UserRoleVO(userVO, roleIds, roleList);
+
+        return Result.okResult(userRoleVO);
+    }
+
+    /**
+     * 更新系统用户
+     * @param userDto 用户请求实体
+     * @return
+     */
+    @Override
+    @Transactional
+    public Result updateInfo(UserDto userDto) {
+        Long updateBy = SecurityUtils.getUserId();
+        User user = BeanCopyUtils.copyBean(userDto, User.class);
+        user.setUpdateBy(updateBy);
+        user.setUpdateTime(new Date());
+        updateById(user);
+        List<Long> roleIds = userDto.getRoleIds();
+        if(CollectionUtils.isEmpty(roleIds)) return Result.okResult();
+        QueryWrapper<UserRole> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", user.getId());
+        userRoleService.remove(queryWrapper);
+
+        roleIds.forEach(roleId -> {
+            userRoleService.save(new UserRole(null, user.getId(), roleId));
+        });
+        return Result.okResult();
+    }
+
+    @Override
+    @Transactional
+    public Result delteBatch(Long[] ids) {
+        List<Long> idList = (List<Long>) CollectionUtils.arrayToList(ids);
+        if (CollectionUtils.isEmpty(idList)) {
+            return Result.errorResult(AppHttpCodeEnum.OPERATION_ERROR);
+        }
+        int update = userMapper.deleteBatchIds(idList);
+        QueryWrapper<UserRole> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("user_id", idList);
+        userRoleService.remove(queryWrapper);
+        return update == ids.length ? Result.okResult() : Result.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
+    }
+
+    private boolean phoneNumberExist(String phoneNumber) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("phone_number", phoneNumber);
+
+        return count(queryWrapper) != 0;
+    }
+
+    private boolean emailExist(String email) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("email", email);
+
+        return count(queryWrapper) != 0;
+    }
 
     private boolean nickNameExist(String nickName) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
