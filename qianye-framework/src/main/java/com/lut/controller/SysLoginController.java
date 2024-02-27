@@ -100,6 +100,7 @@ public class SysLoginController {
         return Result.okResult(new RoutersVO(menus));
     }
 
+    @SystemLog(businessName = "用户注销")
     @PostMapping("/sys/logout")
     public Result logout() {
         return loginService.logout(SystemConstants.USER_TYPE_ADMIN);

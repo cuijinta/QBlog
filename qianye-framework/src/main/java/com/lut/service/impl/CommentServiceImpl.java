@@ -16,6 +16,7 @@ import com.lut.service.UserService;
 import com.lut.utils.BeanCopyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -56,11 +57,14 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
         List<CommentVO> commentVOList = toCommentVOList(page.getRecords());
         //查询所有子评论的集合
-        commentVOList.stream().map(commentVO -> {
-            List<CommentVO> children = getChildren(commentVO.getId());
-            commentVO.setChildren(children);
-            return commentVO;
-        }).collect(Collectors.toList());
+        if(!CollectionUtils.isEmpty(commentVOList)) {
+            commentVOList.stream().map(commentVO -> {
+                List<CommentVO> children = getChildren(commentVO.getId());
+                commentVO.setChildren(children);
+                return commentVO;
+            }).collect(Collectors.toList());
+        }
+
         return Result.okResult(new PageVO(commentVOList, page.getTotal()));
     }
 
@@ -97,9 +101,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     private List<CommentVO> toCommentVOList(List<Comment> list) {
         List<CommentVO> commentVOList = BeanCopyUtils.copyBeanList(list, CommentVO.class);
 
+        if(CollectionUtils.isEmpty(list)) return null;
         //遍历vo集合，通过createBy查询用户的昵称并赋值
         commentVOList.stream().map(commentVO -> {
             //通过createBy查询用户昵称
+            if(userService.getById(commentVO.getCreateBy()) == null) return null;
             String nickName = userService.getById(commentVO.getCreateBy()).getNickName();
             commentVO.setUsername(nickName);
             //如果toCommentUserId不为-1时才进行查询

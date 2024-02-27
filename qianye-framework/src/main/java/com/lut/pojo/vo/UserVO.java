@@ -20,7 +20,7 @@ public class UserVO {
     private String email;
     private Long id;
     private String nickName;
-    private String phonenumber;
+    private String phoneNumber;
     private String sex;
     private String status;
     private Long updateBy;
