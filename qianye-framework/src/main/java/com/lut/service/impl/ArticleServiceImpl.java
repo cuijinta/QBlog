@@ -95,6 +95,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         //文章的状态是已经发布的
         //对isTop进行降序
         lambdaQueryWrapper.orderByDesc(Article::getIsTop);
+        lambdaQueryWrapper.orderByDesc(Article::getUpdateTime);
         //分页查询
         Page<Article> page = new Page<>(pageNum, pageSize);
         page(page, lambdaQueryWrapper);
