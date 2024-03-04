@@ -91,7 +91,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String encodePassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodePassword);
         //存入数据库
-        save(user);
+        user.setCreateBy(-1L); //表示自己创建
+        user.setUpdateBy(-1L);
+        userMapper.insert(user);
         return Result.okResult();
     }
 
