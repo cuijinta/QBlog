@@ -3,11 +3,6 @@ server:
 spring:
   profiles:
     active: test
-#  datasource:
-#    url: jdbc:mysql://47.97.179.125:3306/qianye_blog?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-#    username: root
-#    password: 123456
-#    driver-class-name: com.mysql.cj.jdbc.Driver
   servlet:
     multipart:
       max-file-size: 2MB
@@ -16,6 +11,8 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  main: #解决循环依赖
+    allow-circular-references: true
 
 mybatis-plus:
   configuration:

@@ -1,7 +1,6 @@
 package com.lut.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lut.constant.AppHttpCodeEnum;
@@ -16,6 +15,7 @@ import com.lut.service.ArticleService;
 import com.lut.service.CategoryService;
 import com.lut.utils.BeanCopyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.util.CollectionUtils;
@@ -92,8 +92,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
         return Result.okResult(new PageVO(page.getRecords(), page.getTotal()));
     }
-
-
 
     @Override
     public Result delete(Long[] ids) {
