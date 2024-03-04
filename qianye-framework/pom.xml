@@ -127,7 +127,7 @@
                 <executions>
                     <execution>
                         <id>repackage</id>
-<!--                        <phase>none</phase>-->
+<!--                        <phase>none</phase>--> <!--设置子模块不适用打包插件，可设置在资源子模块或其他不用被打包的子模块-->
                     </execution>
                 </executions>
             </plugin>

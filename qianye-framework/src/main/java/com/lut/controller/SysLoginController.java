@@ -70,6 +70,7 @@ public class SysLoginController {
      * @return userInfoVO
      */
     @GetMapping("getInfo")
+    @SystemLog(businessName = "获取用户信息")
     public Result<AdminUserVO> getInfo() {
         //获取当前登录的用户
         LoginUser loginUser = SecurityUtils.getLoginUser();

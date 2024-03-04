@@ -2,6 +2,7 @@ package com.lut.utils;
 
 import com.lut.pojo.entity.LoginUser;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
@@ -15,14 +16,17 @@ public class SecurityUtils {
      **/
     public static LoginUser getLoginUser()
     {
-        return getAuthentication().getPrincipal() == null ? (LoginUser) getAuthentication().getPrincipal() : null;
+        Object principal = getAuthentication().getPrincipal();
+        return (principal != null && principal instanceof LoginUser) ? (LoginUser) principal : null;
     }
 
     /**
      * 获取Authentication
      */
     public static Authentication getAuthentication() {
-        return SecurityContextHolder.getContext().getAuthentication();
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        return authentication;
     }
 
     public static Boolean isAdmin(){
