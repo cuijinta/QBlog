@@ -1026,6 +1026,99 @@ CategoryController
     }
 ~~~~
 
+## 3.部署上线
+
+### 部署问题
+
+#### 循环依赖解决
+
+- 将springboot 版本升级到 2.6.11 ,2.6之前springboot默认自动处理循环依赖问题，升级之后出现循环依赖问题：
+
+  ```bash
+  The dependencies of some of the beans in the application context form a cycle:
+  
+  articleController (field private com.lut.service.ArticleService com.lut.controller.ArticleController.articleService)
+  ┌─────┐
+  | articleService (field private com.lut.service.CategoryService com.lut.service.impl.ArticleServiceImpl.categoryService)
+  ↑ ↓
+  | categoryService (field private com.lut.service.ArticleService com.lut.service.impl.CategoryServiceImpl.articleService)
+  └─────┘
+  ```
+
+  循环依赖产生的远离来自于 spring 框架 依赖注入（Dependency  Injection）特性，它允许类在不需要直接创建或查找依赖对象的情况下，通过声明（例如，使用 @Autowired 注解）来获取其依赖。
+
+  循环依赖本来属于设计上的问题，但我们到这里去改动我们的设计显然难度不小，我们可以用一些方法来解决：[【Java】Spring循环依赖：原因与解决方法-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/2392756)
+
+  ```yml
+  main: #解决循环依赖
+    allow-circular-references: true
+  ```
+
+#### 打包问题
+
+> 打出的包出现“**没有主清单属性**”，原因是打包只有子模块，并没有从父模块开始（即使我们在父模块的生命周期打包）
+
+使用maven插件 ：**spring-boot-maven-plugin**
+
+父模块：
+
+```xml
+<plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <version>2.5.4</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>repackage</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
+
+子模块：
+
+```xml
+<plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.5.4</version>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+<!--                        <phase>none</phase>--> <!--设置子模块不适用打包插件，可设置在资源子模块或其他不用被打包的子模块-->
+                    </execution>
+                </executions>
+            </plugin>
+```
+
+#### nginx 配置问题
+
+对于两个前端的问题，可以再nginx中使用同一个server配置：
+
+
+
+```conf
+server {
+    listen 80;
+    server_name 你的IP;
+location / {
+    root /www/wwwroot/QBlog-front/8093/dist;
+    try_files $uri $uri/ /index.html;
+	}
+
+location /admin {
+    alias /www/wwwroot/QBlog-front/8094/dist;
+    try_files $uri $uri/ /index.html;
+	}
+}
+```
+
+
+
+也可以使用功能两个server，监听不同的端口来实现
+
 
 
 
