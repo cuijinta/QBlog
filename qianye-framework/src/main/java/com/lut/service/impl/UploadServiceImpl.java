@@ -14,7 +14,6 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
 import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,7 +28,7 @@ import java.io.InputStream;
  */
 @Service
 @Data
-@ConfigurationProperties(prefix = "oss")
+//@ConfigurationProperties(prefix = "oss")
 public class UploadServiceImpl implements UploadService {
 
     private String accessKey;
@@ -42,7 +41,6 @@ public class UploadServiceImpl implements UploadService {
      * @param img 图片实体
      * @return 上传结果
      */
-    @Override
     public Result uploadImg(MultipartFile img) {
         //判断文件类型
         //获取原始文件名

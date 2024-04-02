@@ -24,7 +24,8 @@ public enum AppHttpCodeEnum {
     LOGIN_ERROR(505,"用户名或密码错误"),
     PARAM_LOST(513, "参数缺失"),
     OPERATION_ERROR(514, "错误操作"),
-    PARENT_NOT_ALLOW(515, "上级菜单不能为当前菜单");
+    PARENT_NOT_ALLOW(515, "上级菜单不能为当前菜单"),
+    FILE_UPLOAD_ERROR(516, "文件上传失败");
 
     int code;
     String msg;
